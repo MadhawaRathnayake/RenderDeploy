@@ -8,6 +8,7 @@ import userRoute from "./routes/user.route.js";
 import chatRoute from "./routes/chat.route.js";
 import messageRoute from "./routes/message.route.js";
 import path from "path";
+const PORT = process.env.PORT || 5000;
 
 const __dirname = path.resolve();
 
@@ -25,11 +26,18 @@ app.use("/api/chats", chatRoute);
 app.use("/api/messages", messageRoute);
 
 app.use(express.static(path.join(__dirname, '/client/dist')));
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'client', 'dist', index.html));
+    res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+});
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client/build/index.html'));
 });
 
 app.listen(process.env.PORT || 8800, () => {
     console.log("Server is Running!")
 }); 
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
