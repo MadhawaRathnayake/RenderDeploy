@@ -13,7 +13,7 @@ const __dirname = path.resolve();
 
 const app = express();
 
-app.use(cors());
+app.use(cors({origin:"https://easycar.onrender.com", credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 
